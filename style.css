@@ -3,6 +3,21 @@
     --primary-dark: #273447;
 }
 
+/*Removes all padding and margin from elements that have them applied by default.
+  Makes all pseudo-elements (::before and ::after) inherit their parent's box-sizing as opposed
+  to always using content-box. This determines if properties like padding are applied inwards
+  (maintaining element width) or outwards (adding to the element width).
+  Ref: https://stackoverflow.com/questions/58981682/whats-the-purpose-of-these-css-rules
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
 body {
     font-family:Roboto, sans-serif;
 }
