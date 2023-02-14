@@ -28,7 +28,7 @@ const inputBtns = [
 ];
 
 //GUI Functionality
-inputBtns.forEach(function(item) {
+inputBtns.forEach(item => {
     item.addEventListener('click', () => {
         displayString += item.textContent;
         updateDisplay(displayString);
@@ -75,12 +75,6 @@ window.addEventListener('keydown', (e) => {
 });
 
 
-//Inputs: UI buttons, keyboard input
-function guiInputHandler(e) {
-    //User input should be a series of numbers delimited by operator symbols, probably a string
-
-}
-
 //Outputs: Text display
 function updateDisplay(displayValue) {
     userDisplay.textContent = displayValue;
@@ -119,7 +113,7 @@ function validateSubmission (userSubmission) {
     //single number submission
     //invalid characters
     //leading operator, trailing operator
-    //
+    //multiple decimal points in a number
 }
 
 function formatSubmission(validatedSubmission) {
@@ -148,13 +142,23 @@ function parseSubmission(formattedSubmission) {
     //Take submission formatted for internal processing and call operate(a, b, operator)
     //Keep
 
+
+
 }
 
 
 function operate(a, b, operator) {
-
+    switch (operator) {
+        case '+':
+            return add(a, b);
+        case '-':
+            return subtract(a, b);
+        case '*':
+            return multiply(a, b);
+        case '/':
+            return divide(a, b);
+    }
 }
-
 
 //Math Operations
 function add(a, b) {
