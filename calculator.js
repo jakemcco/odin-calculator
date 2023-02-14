@@ -2,22 +2,8 @@
 //Inputs: UI buttons, keyboard input
 function inputHandler() {
     //User input should be a series of numbers delimited by operator symbols, probably a string
+    
 
-    //Could use Array to store each item as a number object or operator object with value equal to the number/operator name
-    let userSubmission = [
-        {
-            number:value,
-            operator:value
-        },
-        {
-            number:value,
-            operator:value
-        },
-        {
-            number:value,
-            operator:value
-        },
-    ];
 
 }
 
@@ -43,13 +29,37 @@ function calculate() { //Equals button calls this
 
 
 //Internals
-function validateInput(userInput) {
+function validateSubmission (userSubmission) {
+    //Should evaluate the user's submission and reject inputs with invalid characters
+    //fail with alert, clear UI?
+}
+
+function formatSubmission(validatedSubmission) {
+    //Should accept validated submission, create 
+
+    //Could use Array to store each item as a number obj or operator obj w/ val = the number/operator
+    let userSubmission = [
+        {
+            number:value,
+            operator:value
+        },
+        {
+            number:value,
+            operator:value
+        },
+        {
+            number:value,
+            operator:value
+        },
+    ];
+}
+
+function parseSubmission(formattedSubmission) {
+    //Take submission formatted for internal processing and call operate(a, b, operator)
+    //Keep
 
 }
 
-function parseInput(cleanedInput) {
-
-}
 
 function operate(a, b, operator) {
 
