@@ -3,10 +3,55 @@ const userDisplay = document.getElementById('calc-display');
 
 updateDisplay(displayString);
 
+//GUI Variables
+const btnOne = document.getElementById("one");
+const btnTwo = document.getElementById("two");
+const btnThree = document.getElementById("three");
+const btnFour = document.getElementById("four");
+const btnFive = document.getElementById("five");
+const btnSix = document.getElementById("six");
+const btnSeven = document.getElementById("seven");
+const btnEight = document.getElementById("eight");
+const btnNine = document.getElementById("nine");
+const btnZero = document.getElementById("zero");
+const btnDecimal = document.getElementById("decimal");
+const btnDivide = document.getElementById("divide");
+const btnMultiply = document.getElementById("multiply");
+const btnMinus = document.getElementById("minus");
+const btnPlus = document.getElementById("plus");
+const btnRemove = document.getElementById("remove");
+const btnClear = document.getElementById("clear");
+const btnEquals = document.getElementById("equals");
+
+const inputBtns = [
+    btnOne, btnTwo, btnThree, btnFour, btnFive,      btnSix, btnSeven, btnEight, btnNine, btnZero, btnDecimal, btnDivide, btnMultiply, btnMinus, btnPlus
+];
+
+//GUI Functionality
+inputBtns.forEach(function(item) {
+    item.addEventListener('click', () => {
+        displayString += item.textContent;
+        updateDisplay(displayString);
+    })
+});
+
+btnRemove.addEventListener('click', () => {
+    remove();
+});
+
+btnClear.addEventListener('click', () => {
+    clear();
+});
+
+btnEquals.addEventListener('click', () => {
+    calculate();
+});
+
+
 
 
 //Inputs: UI buttons, keyboard input
-function inputHandler(userInput) {
+function guiInputHandler(e) {
     //User input should be a series of numbers delimited by operator symbols, probably a string
 
 }
@@ -21,7 +66,7 @@ function clearDisplay() {
 }
 
 //User functionality/calls: 
-function undo() {
+function remove() {
     //Should remove a character from the current user input string and update display
     displayString = displayString.substring(0,displayString.length-1);
     updateDisplay(displayString);
