@@ -47,7 +47,32 @@ btnEquals.addEventListener('click', () => {
     calculate();
 });
 
+//Keyboard Variables
+const inputKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+'.', '*', '/', '+', '-'
+];
 
+const funcKeys = ['Backspace', 'Delete', 'Enter'];
+console.log('Backspace' in funcKeys);
+
+//Keyboard Functionality
+window.addEventListener('keydown', (e) => {
+    if (inputKeys.includes(e.key)){
+        displayString += e.key;
+        updateDisplay(displayString);
+    }
+    else if (funcKeys.includes(e.key)) {
+        if (e.key == 'Backspace'){
+            remove();
+        }
+        else if(e.key == 'Delete'){
+            clear();
+        }
+        else if(e.key == 'Enter'){
+            calculate();
+        }
+    }
+});
 
 
 //Inputs: UI buttons, keyboard input
