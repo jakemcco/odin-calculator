@@ -1,7 +1,5 @@
 let displayString = "1+2+3*4-10/5+1";
-
 const userDisplay = document.getElementById('calc-display');
-
 updateDisplay(displayString);
 
 //GUI Variables
@@ -23,7 +21,6 @@ const btnPlus = document.getElementById("plus");
 const btnRemove = document.getElementById("remove");
 const btnClear = document.getElementById("clear");
 const btnEquals = document.getElementById("equals");
-
 const inputBtns = [
     btnOne, btnTwo, btnThree, btnFour, btnFive,      btnSix, btnSeven, btnEight, btnNine, btnZero, btnDecimal, btnDivide, btnMultiply, btnMinus, btnPlus
 ];
@@ -54,7 +51,6 @@ const inputKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
 ];
 
 const funcKeys = ['Backspace', 'Delete', 'Enter'];
-console.log('Backspace' in funcKeys);
 
 //Keyboard Functionality
 window.addEventListener('keydown', (e) => {
@@ -74,7 +70,6 @@ window.addEventListener('keydown', (e) => {
         }
     }
 });
-
 
 //Outputs: Text display
 function updateDisplay(displayValue) {
@@ -100,8 +95,9 @@ function clear() {
 
 function calculate() { //Equals button calls this
     //Should process the current user input string
-    console.log(parseSubmission(formatSubmission(validateSubmission(displayString))));
-
+    const calcResult = parseSubmission(formatSubmission(validateSubmission(displayString)));
+    displayString = calcResult;
+    updateDisplay(displayString);
 }
 
 //Internals
@@ -132,7 +128,6 @@ function parseSubmission(formattedSubmission) {
 function parseMultDiv(submission){
     //Recursively process array performing multiply and divide operations
     for (let i=0; i<submission.length; i++){
-        console.log(submission);
         if (submission[i] == '*' || submission[i] == '/'){
             const opResult = operate(submission[i-1], submission[i+1], submission[i]);
             
@@ -148,7 +143,6 @@ function parseMultDiv(submission){
 function parseAddSub(submission){
     //Recursively process array performing add and subtract operations
     for (let i=0; i<submission.length; i++){
-        console.log(submission);
         if (submission[i] == '+' || submission[i] == '-'){
             const opResult = operate(submission[i-1], submission[i+1], submission[i]);
             
@@ -160,7 +154,6 @@ function parseAddSub(submission){
     }
     return submission;
 }
-
 
 //Math Operations
 function add(a, b) {

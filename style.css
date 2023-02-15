@@ -1,6 +1,7 @@
 :root {
     --primary-light: #F9FAF8;
     --primary-dark: #273447;
+    --secondary-dark: #3b4a61;
 }
 
 /*Removes all padding and margin from elements that have them applied by default.
@@ -19,6 +20,7 @@
 
 body {
     font-family:Roboto, sans-serif;
+    background-color: var(--secondary-dark)
 }
 
 .site-header, .site-footer {
@@ -38,6 +40,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-width: 200px;
+    background-color: var(--primary-dark);
 }
 .calc-display-container {
     justify-self: center;
@@ -52,10 +56,7 @@ body {
     border-style: solid;
     border-color:#6d7988;
     border-width: 1px;
-}
-
-#calc-display {
-
+    background-color: var(--primary-light);
 }
 
 .btn-container-all {
