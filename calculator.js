@@ -1,4 +1,4 @@
-let displayString = "1+2+3*4-5";
+let displayString = "1+2+3*4-10/5+1";
 
 const userDisplay = document.getElementById('calc-display');
 
@@ -123,46 +123,42 @@ function formatSubmission(validatedSubmission) {
     return myNumbers = validatedSubmission.split(/([*/+-])/); //Split on delimeters, parentheses allows us to keep the delimeter.
 }
 
-
-//Preprocess string and break it into an array
-//Need to string.split() with a Regex for splitting on different operators
-
 function parseSubmission(formattedSubmission) {
-    //Take submission formatted for internal processing and call operate(a, b, operator)
-    //Keep
+    const halfParsed = parseMultDiv(formattedSubmission);
+    const fullyParsed = parseAddSub(halfParsed);
+    return fullyParsed;
+}
 
-    for (let i=0; i<formattedSubmission.length; i++){
-        console.log(formattedSubmission);
-        if (formattedSubmission[i] == '*' || formattedSubmission[i] == '/'){
-            //This doesn't account for numbers larger than 1 digit
-            const opResult = operate(formattedSubmission[i-1], formattedSubmission[i+1], formattedSubmission[i]);
+function parseMultDiv(submission){
+    //Recursively process array performing multiply and divide operations
+    for (let i=0; i<submission.length; i++){
+        console.log(submission);
+        if (submission[i] == '*' || submission[i] == '/'){
+            const opResult = operate(submission[i-1], submission[i+1], submission[i]);
             
-            let newArray = formattedSubmission;
+            let newArray = submission;
             newArray.splice(i-1, 3, opResult); // Remove operator and operands on either side, replace with result of operation
 
-            return parseSubmission(newArray);
+            return parseMultDiv(newArray);
         }
-
-        else if (formattedSubmission[i] == '+' || formattedSubmission[i] == '-'){
-            //This doesn't account for numbers larger than 1 digit
-            const opResult = operate(formattedSubmission[i-1], formattedSubmission[i+1], formattedSubmission[i]);
-
-            let newArray = formattedSubmission;
-            newArray.splice(i-1, 3, opResult); // Remove operator and operands on either side, replace with result of operation
-
-            return parseSubmission(newArray);
-        }
-
     }
-    return formattedSubmission [0];
+    return submission;
 }
 
-function parseMultDiv(){
+function parseAddSub(submission){
+    //Recursively process array performing add and subtract operations
+    for (let i=0; i<submission.length; i++){
+        console.log(submission);
+        if (submission[i] == '+' || submission[i] == '-'){
+            const opResult = operate(submission[i-1], submission[i+1], submission[i]);
+            
+            let newArray = submission;
+            newArray.splice(i-1, 3, opResult); // Remove operator and operands on either side, replace with result of operation
 
-}
-
-function parseAddSub(){
-
+            return parseAddSub(newArray);
+        }
+    }
+    return submission;
 }
 
 
