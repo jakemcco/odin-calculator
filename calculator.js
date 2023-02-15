@@ -1,3 +1,6 @@
+//Limitations:
+//Does not currently clean/validate user input for syntax, divide by 0, etc...
+
 let displayString = "1+2+3*4-10/5+1";
 const userDisplay = document.getElementById('calc-display');
 updateDisplay(displayString);
