@@ -1,4 +1,5 @@
-let displayString = "12345";
+let displayString = "1+2+3*4-5";
+
 const userDisplay = document.getElementById('calc-display');
 
 updateDisplay(displayString);
@@ -99,10 +100,9 @@ function clear() {
 
 function calculate() { //Equals button calls this
     //Should process the current user input string
+    console.log(parseSubmission(formatSubmission(validateSubmission(displayString))));
 
 }
-
-
 
 //Internals
 function validateSubmission (userSubmission) {
@@ -114,38 +114,74 @@ function validateSubmission (userSubmission) {
     //invalid characters
     //leading operator, trailing operator
     //multiple decimal points in a number
+    return userSubmission;
 }
 
 function formatSubmission(validatedSubmission) {
     //Should accept validated submission, create groups based on operational priority
-    //Primary priority: mult & div
-    //Secondary priority: left-to-right
-
-    //Could use Array to store each item as a number obj or operator obj w/ val = the number/operator
-    let userSubmission = [
-        {
-            number:value,
-            operator:value
-        },
-        {
-            number:value,
-            operator:value
-        },
-        {
-            number:value,
-            operator:value
-        },
-    ];
+    let myNumbers = []
+    return myNumbers = validatedSubmission.split(/([*/+-])/); //Split on delimeters, parentheses allows us to keep the delimeter.
 }
+
+
+//Preprocess string and break it into an array
+//Need to string.split() with a Regex for splitting on different operators
 
 function parseSubmission(formattedSubmission) {
     //Take submission formatted for internal processing and call operate(a, b, operator)
     //Keep
 
+    for (let i=0; i<formattedSubmission.length; i++){
+        console.log(formattedSubmission);
+        if (formattedSubmission[i] == '*' || formattedSubmission[i] == '/'){
+            //This doesn't account for numbers larger than 1 digit
+            const opResult = operate(formattedSubmission[i-1], formattedSubmission[i+1], formattedSubmission[i]);
+            
+            let newArray = formattedSubmission;
+            newArray.splice(i-1, 3, opResult); // Remove operator and operands on either side, replace with result of operation
 
+            return parseSubmission(newArray);
+        }
+
+        else if (formattedSubmission[i] == '+' || formattedSubmission[i] == '-'){
+            //This doesn't account for numbers larger than 1 digit
+            const opResult = operate(formattedSubmission[i-1], formattedSubmission[i+1], formattedSubmission[i]);
+
+            let newArray = formattedSubmission;
+            newArray.splice(i-1, 3, opResult); // Remove operator and operands on either side, replace with result of operation
+
+            return parseSubmission(newArray);
+        }
+
+    }
+    return formattedSubmission [0];
+}
+
+function parseMultDiv(){
 
 }
 
+function parseAddSub(){
+
+}
+
+
+//Math Operations
+function add(a, b) {
+    return Number(a) + Number(b);
+}
+
+function subtract(a, b) {
+    return Number(a) - Number(b);
+}
+
+function multiply(a, b) {
+    return Number(a) * Number(b);
+}
+
+function divide(a, b) {
+    return Number(a) / Number(b);
+}
 
 function operate(a, b, operator) {
     switch (operator) {
@@ -159,31 +195,3 @@ function operate(a, b, operator) {
             return divide(a, b);
     }
 }
-
-//Math Operations
-function add(a, b) {
-    return a+b;
-}
-
-function subtract(a, b) {
-    return a-b;
-}
-
-function multiply(a, b) {
-    return a*b;
-}
-
-function divide(a, b) {
-    return a/b;
-}
-
-
-
-
-
-
-
-
-
-
-
